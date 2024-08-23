@@ -13,7 +13,7 @@ class SettingsController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         #-------------- Fore Retreving just one record:
         // $oneRecord = DB::table('settings')->first();
@@ -28,7 +28,7 @@ class SettingsController extends Controller
         #-------------- Dealing with a user-defined Helper method (to standardized sending responses)
         $settingsData = DB::table('settings')->get();
 
-        if($settingsData) {
+        if(count($settingsData) > 1) {
             return ApiResponse::successResponse(SettingsResource::collection($settingsData), 200, 'settings data returned successfully');
         }
         return ApiResponse::errorResponse(message: 'there is no settings data');
