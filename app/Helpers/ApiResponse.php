@@ -13,7 +13,7 @@ class ApiResponse
         ]);
     }
 
-    public static function errorResponse($status = -1, $message = 'something wrong')
+    public static function errorResponse($status = 0, $message = 'something wrong')
     {
         return response()->json([
             'status' => $status,
