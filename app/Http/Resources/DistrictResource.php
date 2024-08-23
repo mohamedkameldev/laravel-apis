@@ -15,10 +15,11 @@ class DistrictResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // dd($this);
         return [
             'district id' => $this->id,
             'district name' => $this->name,
-            // "district's city" => DB::table('cities')->find($this->city_id)->name,
+            "district's city" => new CityResource($this->city), // $this->city: relation in the model
         ];
     }
 }
