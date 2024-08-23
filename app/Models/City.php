@@ -12,4 +12,9 @@ class City extends Model
     protected $fillable = [
         'city'
     ];
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
 }

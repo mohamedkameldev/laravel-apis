@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\DistrictController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::get('settings', SettingsController::class);
 
 #--------------------------------- LOCATIONS
 Route::get('cities', CityController::class);
+Route::get('city-districts/{city}', DistrictController::class);

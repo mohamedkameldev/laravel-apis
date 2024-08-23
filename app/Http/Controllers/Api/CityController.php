@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
 use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
     public function __invoke()
     {
-        $cities = City::get();
+        $cities = DB::table('cities')->get();
 
         if(count($cities) > 0) {
             return ApiResponse::successResponse(CityResource::collection($cities), 1, 'all cities');

@@ -4,8 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
-class CityResource extends JsonResource
+class DistrictResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +16,9 @@ class CityResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'city id' => $this->id,
-            'city name' => $this->name,
+            'district id' => $this->id,
+            'district name' => $this->name,
+            // "district's city" => DB::table('cities')->find($this->city_id)->name,
         ];
     }
 }
