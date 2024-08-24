@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\DistrictResource;
 use App\Models\City;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DistrictController extends Controller
 {
