@@ -15,8 +15,8 @@ class DistrictController extends Controller
     public function __invoke(City $city)
     {
         if(count($city->districts) > 0) {
-            return ApiResponse::message(DistrictResource::collection($city->districts), 1, "{$city->name} districts");
+            return ApiResponse::message(1, DistrictResource::collection($city->districts), "{$city->name} districts");
         }
-        return ApiResponse::message(0, "there are no districts for {$city->name}");
+        return ApiResponse::message(0, message: "there are no districts for {$city->name}");
     }
 }

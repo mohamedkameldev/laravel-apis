@@ -28,6 +28,7 @@ class MessageController extends Controller
         // dd($request->safe()->only(['name', 'email', 'message']));
 
         $sendMessage = Message::create($request->safe()->only(['name', 'email', 'message']));
+
         if($sendMessage) {
             return ApiResponse::message(status: 1, message:'your message has been send successfully');
         }

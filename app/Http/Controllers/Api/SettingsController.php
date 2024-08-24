@@ -28,8 +28,8 @@ class SettingsController extends Controller
         $settingsData = DB::table('settings')->get();
 
         if(count($settingsData) > 1) {
-            return ApiResponse::message(SettingsResource::collection($settingsData), 200, 'settings data returned successfully');
+            return ApiResponse::message(1, SettingsResource::collection($settingsData), 'settings data returned successfully');
         }
-        return ApiResponse::message(message: 'there is no settings data');
+        return ApiResponse::message(0, message: 'there is no settings data');
     }
 }
