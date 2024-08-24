@@ -22,7 +22,6 @@ class MessageController extends Controller
         //     'message' => 'required'
         // ]);
 
-
         // dd($request->all());
         // dd($request->validated());
         // dd($request->only(['name', 'email', 'message']));
@@ -30,8 +29,8 @@ class MessageController extends Controller
 
         $sendMessage = Message::create($request->safe()->only(['name', 'email', 'message']));
         if($sendMessage) {
-            return ApiResponse::successResponse(status: 1, message:'your message has been send successfully');
+            return ApiResponse::message(status: 1, message:'your message has been send successfully');
         }
-        return ApiResponse::errorResponse(status: 0, message:'there is some error occured');
+        return ApiResponse::message(status: 0, message:'there is some error occured');
     }
 }

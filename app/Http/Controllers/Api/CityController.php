@@ -14,8 +14,8 @@ class CityController extends Controller
         $cities = DB::table('cities')->get();
 
         if(count($cities) > 0) {
-            return ApiResponse::successResponse(CityResource::collection($cities), 1, 'all cities');
+            return ApiResponse::message(CityResource::collection($cities), 1, 'all cities');
         }
-        return ApiResponse::errorResponse(0, 'there are no cities in the system');
+        return ApiResponse::message(0, 'there are no cities in the system');
     }
 }
