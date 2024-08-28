@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             // SettingsSeeder::class,
             // CitySeeder::class,
             // DistricSeeder::class,
+            // AdSeeder::class
         ]);
     }
 }
