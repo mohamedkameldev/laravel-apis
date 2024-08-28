@@ -47,4 +47,11 @@ class AuthController extends Controller
         }
         return ApiResponse::message(0, message: 'there are some errors has been occured');
     }
+
+    public function logout(Request $request)
+    {
+        // $request->user()->currentAccessToken()->delete();
+        $request->user()->tokens()->delete();
+        return ApiResponse::message(1, message: 'logged out successfully');
+    }
 }
