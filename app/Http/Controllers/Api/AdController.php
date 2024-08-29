@@ -45,4 +45,21 @@ class AdController extends Controller
         }
         return ApiResponse::message(0, message:'there is no enough ads');
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->query('keyword');
+
+        #-- working without any errors:
+        // $results = Ad::where('title', 'like', "%$keyword%")->orWhere('description', 'like', "%$keyword%")->dd();
+
+        $results = Ad::when($keyword, function ($q) use ($keyword) {
+            $q->where('title', 'like', "%$keyword%")->orWhere('description', 'like', "%$keyword%");
+        })->latest()->get();
+
+        if($results > 0) {
+            return ApiResponse::message(1, AdResource::collection($results), 'all matched records');
+        }
+        return ApiResponse::message(0, message: 'there are no matched records');
+    }
 }

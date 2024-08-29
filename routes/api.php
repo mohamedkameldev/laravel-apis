@@ -45,4 +45,5 @@ Route::post('new-message', MessageController::class);
 Route::prefix('ads')->controller(AdController::class)->group(function () {
     Route::get('', 'index');
     Route::get('latest/{num}', 'latest');
+    Route::get('search', 'search');
 });
