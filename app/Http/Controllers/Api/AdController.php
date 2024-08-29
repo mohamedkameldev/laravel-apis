@@ -35,4 +35,14 @@ class AdController extends Controller
         ];
         return ApiResponse::message(1, $data, 'all of ads');
     }
+
+    public function latest($num)
+    {
+        $latestAds = Ad::latest()->take($num)->get();
+
+        if(count($latestAds) >= 1) {
+            return ApiResponse::message(1, AdResource::collection($latestAds), 'the latest '.$num.' ads');
+        }
+        return ApiResponse::message(0, message:'there is no enough ads');
+    }
 }
