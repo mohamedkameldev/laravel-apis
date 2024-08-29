@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\CityController;
@@ -39,3 +40,8 @@ Route::get('city-districts/{city}', DistrictController::class);
 
 #--------------------------------- MESSAGES
 Route::post('new-message', MessageController::class);
+
+#--------------------------------- ADS
+Route::prefix('ads')->controller(AdController::class)->group(function () {
+    Route::get('', 'index');
+});
