@@ -21,7 +21,7 @@ class Ad extends Model
 
     protected static function booting()
     {
-        static::creating(function (Ad $ad) {
+        static::saving(function (Ad $ad) {
             $ad->slug = Str::slug($ad->title);
         });
     }

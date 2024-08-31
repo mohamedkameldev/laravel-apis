@@ -49,5 +49,6 @@ Route::prefix('ads')->controller(AdController::class)->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', 'create');
+        Route::put('update/{adId}', 'update');
     });
 });

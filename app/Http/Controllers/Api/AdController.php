@@ -81,4 +81,27 @@ class AdController extends Controller
         }
         return ApiResponse::message(0, message: 'something wrong is happened');
     }
+
+    public function update(Request $request, string $adId)
+    {
+        // dd($request->all());
+        $ad = Ad::findOrFail($adId);
+        if ($ad->user_id != $request->user()->id) {
+            return ApiResponse::message(0, message:'you aren\'t authorized to update this AD');
+        }
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'phone' => 'required',
+            'status' => 'required'
+        ]);
+
+        $updated_ad = $ad->update($request->only(['title', 'description', 'phone', 'status']));
+
+        if ($updated_ad) {
+            return ApiResponse::message(1, new AdResource($ad), 'ad have been updated successfully');
+        }
+        return ApiResponse::message(0, message: 'something wrong is happened');
+    }
 }
