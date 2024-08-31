@@ -13,31 +13,36 @@ class AdSeeder extends Seeder
             'title' => 'First Ad',
             'description' => 'this is the description for the first ad',
             'phone' => '01023456789',
-            'status' => 'active'
+            'status' => 'active',
+            'user_id' => '1',
         ],
         [
             'title' => 'Second Ad',
             'description' => 'this is the description for the second ad',
             'phone' => '01000000000',
-            'status' => 'active'
+            'status' => 'active',
+            'user_id' => '2'
         ],
         [
             'title' => 'Third Ad',
             'description' => 'this is the description for the third ad',
             'phone' => '01111111111',
-            'status' => 'disabled'
+            'status' => 'disabled',
+            'user_id' => '1',
         ],
         [
             'title' => 'Fourth Ad',
             'description' => 'this is the description for the fourth ad',
             'phone' => '01222222222',
-            'status' => 'active'
+            'status' => 'active',
+            'user_id' => '1',
         ],
         [
             'title' => 'Fifth Ad',
             'description' => 'this is the description for the fifth ad',
             'phone' => '0133333333',
-            'status' => 'disabled'
+            'status' => 'disabled',
+            'user_id' => '2',
         ],
     ];
 

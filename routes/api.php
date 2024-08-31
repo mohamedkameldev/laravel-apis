@@ -46,4 +46,8 @@ Route::prefix('ads')->controller(AdController::class)->group(function () {
     Route::get('', 'index');
     Route::get('latest/{num}', 'latest');
     Route::get('search', 'search');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('create', 'create');
+    });
 });

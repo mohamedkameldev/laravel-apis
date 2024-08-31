@@ -14,7 +14,7 @@ class AdController extends Controller
     {
         $ads = Ad::latest()->paginate(10);
 
-        if(!$ads->hasPages()) {
+        if (!$ads->hasPages()) {
             return ApiResponse::message(1, AdResource::collection($ads), 'all of ads');
         }
         $data = [
@@ -40,7 +40,7 @@ class AdController extends Controller
     {
         $latestAds = Ad::latest()->take($num)->get();
 
-        if(count($latestAds) >= 1) {
+        if (count($latestAds) >= 1) {
             return ApiResponse::message(1, AdResource::collection($latestAds), 'the latest '.$num.' ads');
         }
         return ApiResponse::message(0, message:'there is no enough ads');
@@ -57,9 +57,28 @@ class AdController extends Controller
             $q->where('title', 'like', "%$keyword%")->orWhere('description', 'like', "%$keyword%");
         })->latest()->get();
 
-        if($results > 0) {
+        if (count($results) > 0) {
             return ApiResponse::message(1, AdResource::collection($results), 'all matched records');
         }
         return ApiResponse::message(0, message: 'there are no matched records');
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'phone' => 'required',
+            'status' => 'required'
+        ]);
+
+        $request->merge(['user_id' => $request->user()->id]);
+
+        $created_ad = Ad::create($request->only(['title', 'description', 'phone', 'status', 'user_id']));
+
+        if ($created_ad) {
+            return ApiResponse::message(1, new AdResource($created_ad), 'new ad created successfully');
+        }
+        return ApiResponse::message(0, message: 'something wrong is happened');
     }
 }

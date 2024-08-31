@@ -15,7 +15,8 @@ class Ad extends Model
         'slug',
         'description',
         'phone',
-        'status'
+        'status',
+        'user_id'
     ];
 
     protected static function booting()
