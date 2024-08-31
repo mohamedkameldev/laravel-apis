@@ -104,4 +104,19 @@ class AdController extends Controller
         }
         return ApiResponse::message(0, message: 'something wrong is happened');
     }
+
+    public function delete(string $adId)
+    {
+        $ad = Ad::findOrFail($adId);
+        if ($ad->user_id != request()->user()->id) {
+            return ApiResponse::message(0, message:'you aren\'t authorized to delete this AD');
+        }
+
+        $deleted_ad = $ad->delete();
+
+        if ($deleted_ad) {
+            return ApiResponse::message(1, message:'ad have been deleted successfully');
+        }
+        return ApiResponse::message(0, message: 'something wrong is happened');
+    }
 }
