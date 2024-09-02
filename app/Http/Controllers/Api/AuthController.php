@@ -9,9 +9,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -36,11 +33,11 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return ApiResponse::message(0, $validator->errors(), $validator->errors()->first());
         }
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $token = $user->createToken($user->name)->plainTextToken;
             return ApiResponse::message(1, new UserResource($user, $token), 'user logged in successfully');

@@ -27,7 +27,7 @@ class SettingsController extends Controller
         #-------------- Dealing with a user-defined Helper method (to standardized sending responses)
         $settingsData = DB::table('settings')->get();
 
-        if(count($settingsData) > 1) {
+        if (count($settingsData) > 1) {
             return ApiResponse::message(1, SettingsResource::collection($settingsData), 'settings data returned successfully');
         }
         return ApiResponse::message(0, message: 'there is no settings data');
