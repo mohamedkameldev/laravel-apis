@@ -107,9 +107,9 @@ class AdController extends Controller
 
     public function delete(string $adId)
     {
-        $ad = Ad::findOrFail($adId);
-        if ($ad->user_id != request()->user()->id) {
-            return ApiResponse::message(0, message:'you aren\'t authorized to delete this AD');
+        $ad = Ad::find($adId);
+        if (is_null($ad) || $ad->user_id != request()->user()->id) {
+            return ApiResponse::message(0, message:'you can\'t delete this AD');
         }
 
         $deleted_ad = $ad->delete();
@@ -118,5 +118,14 @@ class AdController extends Controller
             return ApiResponse::message(1, message:'ad have been deleted successfully');
         }
         return ApiResponse::message(0, message: 'something wrong is happened');
+    }
+
+    public function getAllUserAds()
+    {
+        $ads = Ad::where('user_id', request()->user()->id)->get();
+        if (count($ads) > 0) {
+            return ApiResponse::message(1, AdResource::collection($ads), 'all of user ads');
+        }
+        return ApiResponse::message(0, message:'something wrong has been happened');
     }
 }

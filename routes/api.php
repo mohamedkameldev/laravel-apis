@@ -48,6 +48,7 @@ Route::prefix('ads')->controller(AdController::class)->group(function () {
     Route::get('search', 'search');
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::get('getAds', 'getAllUserAds');
         Route::post('create', 'create');
         Route::put('update/{adId}', 'update');
         Route::delete('delete/{adId}', 'delete');
